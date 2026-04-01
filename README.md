@@ -1,13 +1,28 @@
 <div align="center">
 <h1>3D高斯泼溅分块训练策略与交互动画实现的可行性研究</h1>
+</div>
 
-本仓库 Fork 自 [FastGS](https://github.com/fastgs/FastGS)，是毕业设计《3D高斯泼溅分块训练策略与交互动画实现的可行性研究》论文中的 3DGS 训练环境。
+本仓库 fork 自 [FastGS](https://github.com/fastgs/FastGS)，是《3D高斯泼溅分块训练策略与交互动画实现的可行性研究》论文中的 3DGS 训练环境。
+
+执行"高性能电脑, 质量测试"训练:
+```cmd
+python train_task.py
+```
+
+执行"高性能电脑, 不进行质量测试"训练:
+```cmd
+python train_task_no_test.py
+```
+
+执行"低性能电脑, 不进行质量测试"训练:
+```cmd
+python train_task_RTX3050_no_test.py
+```
 
 以下是原本的 README.md:
 
 [🌐 Homepage](https://fastgs.github.io/) | [📄 Paper](https://arxiv.org/abs/2511.04283) ｜[🤗 Pre-trained model](https://huggingface.co/Goodsleepeverday/fastgs)
 
-</div>
 
 <p align="center">
     <img src="assets/teaser_fastgs.jpg" width="800px"/>
