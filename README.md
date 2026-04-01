@@ -1,5 +1,9 @@
 <div align="center">
-<h1>FastGS: Training 3D Gaussian Splatting in 100 Seconds</h1> 
+<h1>3D高斯泼溅分块训练策略与交互动画实现的可行性研究</h1>
+
+本仓库 Fork 自 [FastGS](https://github.com/fastgs/FastGS)，是毕业设计《3D高斯泼溅分块训练策略与交互动画实现的可行性研究》论文中的 3DGS 训练环境。
+
+以下是原本的 README.md:
 
 [🌐 Homepage](https://fastgs.github.io/) | [📄 Paper](https://arxiv.org/abs/2511.04283) ｜[🤗 Pre-trained model](https://huggingface.co/Goodsleepeverday/fastgs)
 
