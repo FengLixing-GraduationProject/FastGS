@@ -1,6 +1,5 @@
 <div align="center">
 <h1>3D高斯泼溅分块训练策略与交互动画实现的可行性研究</h1>
-</div>
 
 本仓库 fork 自 [FastGS](https://github.com/fastgs/FastGS)，是《3D高斯泼溅分块训练策略与交互动画实现的可行性研究》论文中的 3DGS 训练环境。
 
@@ -19,10 +18,12 @@ python train_task_no_test.py
 python train_task_RTX3050_no_test.py
 ```
 
-以下是原本的 README.md:
+以下是原本的 README.md 的文件内容:
+<h1>FastGS: Training 3D Gaussian Splatting in 100 Seconds</h1> 
 
 [🌐 Homepage](https://fastgs.github.io/) | [📄 Paper](https://arxiv.org/abs/2511.04283) ｜[🤗 Pre-trained model](https://huggingface.co/Goodsleepeverday/fastgs)
 
+</div>
 
 <p align="center">
     <img src="assets/teaser_fastgs.jpg" width="800px"/>
