@@ -4,3 +4,8 @@ output/*
 build
 
 *.egg-info
+
+submodules/fused-ssim/build/
+submodules/fused-ssim/dist/
+
+submodules/simple-knn/dist/

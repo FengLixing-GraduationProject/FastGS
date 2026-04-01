@@ -64,8 +64,8 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     bg = torch.rand((3), device="cuda") if opt.random_background else background
     img_num = -1
 
+    torch.cuda.reset_peak_memory_stats()
     for iteration in range(first_iter, opt.iterations + 1):
-
         if websockets:
             if network_gui_ws.curr_id >= 0 and network_gui_ws.curr_id < len(scene.getTrainCameras()):
                 cam = scene.getTrainCameras()[network_gui_ws.curr_id]
@@ -119,7 +119,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
 
             iter_time = iter_start.elapsed_time(iter_end)
             # Log and save
-            # training_report(tb_writer, iteration, Ll1, loss, l1_loss, iter_time, testing_iterations, scene, render_fastgs, (pipe, background, opt.mult))
+            training_report(tb_writer, iteration, Ll1, loss, l1_loss, iter_time, testing_iterations, scene, render_fastgs, (pipe, background, opt.mult))
             if (iteration in saving_iterations):
                 print("\n[ITER {}] Saving Gaussians".format(iteration))
                 scene.save(iteration)
@@ -206,6 +206,8 @@ def training_report(tb_writer, iteration, Ll1, loss, l1_loss, elapsed, testing_i
         tb_writer.add_scalar('train_loss_patches/l1_loss', Ll1.item(), iteration)
         tb_writer.add_scalar('train_loss_patches/total_loss', loss.item(), iteration)
         tb_writer.add_scalar('iter_time', elapsed, iteration)
+        tb_writer.add_scalar("gpu/memory_MB", torch.cuda.memory_allocated() / 1024**2, iteration)
+        tb_writer.add_scalar("gpu/max_memory_MB",torch.cuda.max_memory_allocated() / 1024**2, iteration)
 
     # Report test and samples of training set
     if iteration in testing_iterations:
@@ -242,7 +244,7 @@ def training_report(tb_writer, iteration, Ll1, loss, l1_loss, elapsed, testing_i
         if tb_writer:
             tb_writer.add_histogram("scene/opacity_histogram", scene.gaussians.get_opacity, iteration)
             tb_writer.add_scalar('total_points', scene.gaussians.get_xyz.shape[0], iteration)
-        torch.cuda.empty_cache()
+        # torch.cuda.empty_cache()
 
 if __name__ == "__main__":
     # Set up command line argument parser
@@ -254,10 +256,10 @@ if __name__ == "__main__":
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--debug_from', type=int, default=-1)
     parser.add_argument('--detect_anomaly', action='store_true', default=False)
-    parser.add_argument("--test_iterations", nargs="+", type=int, default=[30_000])
-    parser.add_argument("--save_iterations", nargs="+", type=int, default=[30_000])
+    parser.add_argument("--test_iterations", nargs="+", type=int, default=[7000, 15000, 30000])
+    parser.add_argument("--save_iterations", nargs="+", type=int, default=[100_000])
     parser.add_argument("--quiet", action="store_true")
-    parser.add_argument("--checkpoint_iterations", nargs="+", type=int, default=[30_000])
+    parser.add_argument("--checkpoint_iterations", nargs="+", type=int, default=[100_000])
     parser.add_argument("--start_checkpoint", type=str, default = None)
     parser.add_argument("--websockets", action='store_true', default=False)
     parser.add_argument("--benchmark_dir", type=str, default=None)
